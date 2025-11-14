@@ -1,7 +1,12 @@
 CREATE TABLE clientes (
-	cpf CHAR(11) PRIMARY KEY UNIQUE,
+	cpf CHAR(14) PRIMARY KEY UNIQUE,
 	nome VARCHAR(255) NOT NULL,
 	email VARCHAR(255) NOT NULL UNIQUE,
 	telefone CHAR(13) NOT NULL UNIQUE,
-	cep CHAR(8)
+	cep CHAR(9)
+);
+
+CREATE TABLE categorias (
+	id SERIAL PRIMARY KEY,
+	categoria VARCHAR(20)
 );
