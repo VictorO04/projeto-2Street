@@ -1,9 +1,20 @@
+CREATE TABLE cep (
+	cep CHAR(9) PRIMARY KEY,
+	endereco VARCHAR(100) NOT NULL,
+	bairro VARCHAR(100) NOT NULL,
+	cidade VARCHAR(100) NOT NULL,
+	estado CHAR(2) NOT NULL
+);
+
 CREATE TABLE clientes (
 	cpf CHAR(14) PRIMARY KEY,
 	nome VARCHAR(255) NOT NULL,
 	email VARCHAR(255) NOT NULL UNIQUE,
 	telefone CHAR(13) NOT NULL UNIQUE,
-	cep CHAR(9)
+	cep CHAR(9),
+
+	CONSTRAINT fk_clientes_cep
+	FOREIGN KEY (cep) REFERENCES cep(cep)
 );
 
 CREATE TABLE categorias (
@@ -46,7 +57,7 @@ CREATE TABLE vendas (
 CREATE TABLE itens_venda (
 	id_item_venda SERIAL PRIMARY KEY,
 	id_produto INT NOT NULL,
-	quantidade INT NOT NULL,
+	quantidade INT NOT NULL CHECK (quantidade > 0),
 	id_venda INT NOT NULL,
 
 	CONSTRAINT fk_itens_venda_produtos
