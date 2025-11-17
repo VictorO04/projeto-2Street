@@ -35,13 +35,23 @@ CREATE TABLE produtos (
 CREATE TABLE vendas (
 	id_venda SERIAL PRIMARY KEY,
 	cpf_cliente CHAR(14) NOT NULL,
-	id_produto INT NOT NULL,
-	quantidade INT NOT NULL,
+	valor_total DECIMAL(10, 2) NOT NULL CHECK(valor_total >= 0),
+	forma_pagamento VARCHAR(10) NOT NULL,
 	data_venda DATE DEFAULT CURRENT_DATE,
 
 	CONSTRAINT fk_vendas_clientes
-	FOREIGN KEY (cpf_cliente) REFERENCES clientes(cpf),
+	FOREIGN KEY (cpf_cliente) REFERENCES clientes(cpf)
+);
 
-	CONSTRAINT fk_vendas_produtos
-	FOREIGN KEY (id_produto) REFERENCES produtos(id_produto)
+CREATE TABLE itens_venda (
+	id_item_venda SERIAL PRIMARY KEY,
+	id_produto INT NOT NULL,
+	quantidade INT NOT NULL,
+	id_venda INT NOT NULL,
+
+	CONSTRAINT fk_itens_venda_produtos
+	FOREIGN KEY (id_produto) REFERENCES produtos(id_produto),
+
+	CONSTRAINT fk_itens_venda_vendas
+	FOREIGN KEY (id_venda) REFERENCES vendas(id_venda)
 );
