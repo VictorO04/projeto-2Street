@@ -29,10 +29,11 @@ CREATE TABLE fornecedores (
 
 CREATE TABLE produtos (
 	id_produto SERIAL PRIMARY KEY,
-	produto_url TEXT NOT NULL,
+	produto_url TEXT,
 	nome_produto VARCHAR(255) NOT NULL,
 	id_categoria INT NOT NULL,
 	marca VARCHAR(50) NOT NULL,
+	cor VARCHAR(50) NOT NULL,
 	preco DECIMAL(10,2) NOT NULL CHECK(preco >= 0),
 	estoque INT NOT NULL CHECK(estoque >= 0),
 	id_fornecedor INT not NULL,
@@ -49,6 +50,7 @@ CREATE TABLE vendas (
 	cpf_cliente CHAR(14) NOT NULL,
 	valor_total DECIMAL(10, 2) NOT NULL CHECK(valor_total >= 0),
 	forma_pagamento VARCHAR(10) NOT NULL,
+	status_pedido VARCHAR(20) NOT NULL,
 	data_venda DATE DEFAULT CURRENT_DATE,
 
 	CONSTRAINT fk_vendas_clientes
