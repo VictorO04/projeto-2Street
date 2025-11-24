@@ -29,6 +29,7 @@ CREATE TABLE fornecedores (
 
 CREATE TABLE produtos (
 	id_produto SERIAL PRIMARY KEY,
+	produto_url TEXT NOT NULL,
 	nome_produto VARCHAR(255) NOT NULL,
 	id_categoria INT NOT NULL,
 	marca VARCHAR(50) NOT NULL,
